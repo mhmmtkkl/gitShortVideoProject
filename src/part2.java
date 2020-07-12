@@ -3,28 +3,18 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
-import org.testng.annotations.Test;
+import org.testng.annotations.*;
 
 import java.util.concurrent.TimeUnit;
 
-public class GitPush1 {
+public class part2 {
 
-   /*
-        BeforeClass --> Run before the each class
-            BeforeMethod --> Run before the Each test
-                Test
-                Test
-            AfterMethod --> Run after the Each test
-        AfterClass --> Run After the each class
+    WebDriver driver;
 
-    */
-
-
-    @Test
-    public void contactFunc(){
-
+    @BeforeClass
+    public void beforeMethod(){
         System.setProperty("webdriver.chrome.driver", "D:\\Selenium dependency\\drivers\\chromedriver.exe");
-        WebDriver driver = new ChromeDriver();
+        driver = new ChromeDriver();
         driver.manage().window().maximize();
 
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
@@ -38,6 +28,10 @@ public class GitPush1 {
         passWordInput.sendKeys("TechnoStudy123");
 
         driver.findElement(By.id("loginBtn")).click();
+    }
+
+    @Test
+    public void contact(){
 
         driver.findElement(By.id("nav-primary-contacts-branch")).click();
 
@@ -47,25 +41,15 @@ public class GitPush1 {
 
         Assert.assertTrue(url.contains("contacts"));
 
+        try {
+            Thread.sleep(5000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
     @Test
     public void companies(){
-        System.setProperty("webdriver.chrome.driver", "D:\\Selenium dependency\\drivers\\chromedriver.exe");
-        WebDriver driver = new ChromeDriver();
-        driver.manage().window().maximize();
-
-        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-
-        driver.get("https://app.hubspot.com/login");
-
-        WebElement Username = driver.findElement(By.id("username"));
-        Username.sendKeys("technostudyy@gmail.com");
-
-        WebElement passWordInput = driver.findElement(By.id("password"));
-        passWordInput.sendKeys("TechnoStudy123");
-
-        driver.findElement(By.id("loginBtn")).click();
 
         driver.findElement(By.id("nav-primary-contacts-branch")).click();
 
@@ -75,7 +59,16 @@ public class GitPush1 {
 
         Assert.assertTrue(url.contains("companies"));
 
+        try {
+            Thread.sleep(5000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
+    @AfterClass
+    public void afterMethod(){
+        driver.quit();
+    }
 
 }
